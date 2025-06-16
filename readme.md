@@ -119,3 +119,57 @@ Após registrar um novo usuário através da interface, você pode promovê-lo a
 UPDATE users SET role = 'ROLE_ADMIN' WHERE id = X;
 ```
 
+## 8. Testando a API com o Postman
+
+Para facilitar a verificação e o teste de todos os endpoints da API, uma collection do Postman (`FullStack.postman_collection.json`) está incluída na raiz deste repositório.
+
+Siga os passos abaixo para importar e utilizar a collection.
+
+### 8.1. Importação da Collection
+
+1.  Abra o Postman.
+2.  Clique no botão **Import** no canto superior esquerdo.
+3.  Selecione o arquivo `FullStack.postman_collection.json` que está neste projeto.
+4.  Após a importação, uma nova collection chamada "FullStack" aparecerá na sua lista.
+
+### 8.2. Configuração das Variáveis
+
+A collection utiliza variáveis para facilitar a troca entre o ambiente local e o de produção, e para gerenciar o token de autenticação.
+
+1.  Clique na collection "FullStack" e vá para a aba **"Variables"**.
+2.  **`baseUrl`**: Existem duas variáveis `baseUrl`.
+    -   **Para teste local:** Deixe a variável `http://localhost:8080/fullstack` **marcada** (habilitada).
+    -   **Para teste no servidor publicado:** Desmarque a variável local e **marque** a variável `https://vpsw2882.publiccloud.com.br/fullstack`.
+3.  **`Token`**: Esta variável armazenará o token JWT após o login. O próximo passo explica como preenchê-la automaticamente.
+
+### 8.3. Fluxo de Teste Recomendado
+
+Para testar a API de forma eficaz, siga esta sequência:
+
+#### **Passo 1: Registrar Usuários**
+
+-   **`users register admin`**: Execute esta requisição `POST` para criar um usuário com permissões de **ADMIN**.
+-   **`users register`**: Execute esta requisição `POST` para criar um usuário com permissões de **USER**.
+
+#### **Passo 2: Autenticar e Obter o Token**
+
+Esta é a etapa mais importante. Vamos configurar o Postman para salvar o token automaticamente.
+
+1.  Abra a requisição **`authenticate`**.
+2.  No corpo (`Body`), insira as credenciais do usuário que deseja testar (o admin ou o usuário comum que você acabou de criar).
+3.  Clique em **"Send"**. Após uma autenticação bem-sucedida, o token será salvo automaticamente e usado em todas as outras requisições.
+
+#### **Passo 3: Testar os Endpoints Protegidos**
+
+Agora que a variável `{{Token}}` está preenchida, você pode executar as outras requisições. Elas já estão configuradas para usar o Bearer Token.
+
+-   **Endpoints de Usuário (requerem token de ADMIN):**
+    -   **`users list`**: Testa a listagem paginada de usuários.
+    -   **`users` (GET, PUT, DELETE)**: Testam as operações em um usuário específico. Lembre-se de alterar o ID na URL para um ID de usuário válido.
+
+-   **Endpoints de Endereço (requerem qualquer token válido):**
+    -   **`addresses list`**: Lista os endereços de um usuário. Altere o ID do usuário na URL.
+    -   **`addresses` (POST, PUT, DELETE)**: Criam, atualizam e excluem endereços. Altere o ID do usuário e do endereço na URL conforme necessário.
+
+Seguindo este guia, será possível testar todas as funcionalidades da API de forma rápida e organizada.
+
