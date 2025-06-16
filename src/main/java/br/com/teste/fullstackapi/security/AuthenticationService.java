@@ -12,6 +12,8 @@ import br.com.teste.fullstackapi.security.dto.AuthenticationRequest;
 import br.com.teste.fullstackapi.security.dto.AuthenticationResponse;
 import br.com.teste.fullstackapi.security.dto.RegisterRequest;
 
+import br.com.teste.fullstackapi.exception.EmailAlreadyExistsException;
+
 @Service
 public class AuthenticationService {
 
@@ -28,6 +30,14 @@ public class AuthenticationService {
     }
 
     public AuthenticationResponse register(RegisterRequest request) {
+
+        if (userRepository.findByEmail(request.getEmail()).isPresent()) {
+            // Se o Optional não estiver vazio, significa que o e-mail já existe.
+            // Lançamos nossa própria exceção customizada.
+            throw new EmailAlreadyExistsException("O e-mail informado já está em uso.");
+        }
+
+
         User user = new User();
         user.setNome(request.getNome());
         user.setEmail(request.getEmail());
