@@ -56,7 +56,7 @@ Siga os passos abaixo para configurar e executar o projeto em seu ambiente de de
 
 Abra um terminal e clone o projeto do GitHub:
 ```sh
-git clone https://github.com/mauandrade99/fullstackapi.git
+git clone https://github.com/mauandrade99/fullstack.git
 cd fullstackapi
 ```
 
