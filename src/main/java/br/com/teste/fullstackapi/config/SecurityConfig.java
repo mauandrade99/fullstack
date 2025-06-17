@@ -1,8 +1,12 @@
 package br.com.teste.fullstackapi.config;
 
+import java.util.Arrays;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationProvider;
+import static org.springframework.security.config.Customizer.withDefaults;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -10,6 +14,9 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import br.com.teste.fullstackapi.security.JwtAuthFilter;
 
@@ -27,8 +34,10 @@ public class SecurityConfig {
     }
 
     @Bean
+    @Order(1)
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+            .cors(withDefaults()) 
             .csrf(AbstractHttpConfigurer::disable)
             
             // APLICAR SEGURANÇA APENAS PARA A API
@@ -47,4 +56,31 @@ public class SecurityConfig {
         
         return http.build();
     }
+
+    @Bean
+    @SuppressWarnings("unused")
+    CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+
+        // Permite requisições do seu app Angular local
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200","https://vpsw2882.publiccloud.com.br")); 
+        
+        // Em produção, você pode adicionar o domínio do seu frontend publicado
+        // Exemplo: configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200", "https://seu-dominio.com"));
+        
+        // Métodos HTTP permitidos
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        
+        // Cabeçalhos permitidos
+        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "x-auth-token"));
+        
+        // Permite o envio de credenciais (se necessário)
+        configuration.setAllowCredentials(true);
+        
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        // Aplica esta configuração para todos os caminhos que esta cadeia de filtros gerencia (/api/**)
+        source.registerCorsConfiguration("/**", configuration); 
+    
+    return source;
+}
 }
