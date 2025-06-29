@@ -1,0 +1,543 @@
+{
+	"info": {
+		"_postman_id": "ec292d7b-0185-41ca-a7fe-e3538b71c9d8",
+		"name": "FullStack",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16915416"
+	},
+	"item": [
+		{
+			"name": "users register",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"try {\r",
+							"    var jsonData = pm.response.json();\r",
+							"\r",
+							"    // Verifica se a resposta JSON contém uma propriedade chamada \"token\"\r",
+							"    if (jsonData && jsonData.token) {\r",
+							"        // Se o token existir, salva seu valor na variável \"Token\" no nível da collection\r",
+							"        pm.collectionVariables.set(\"Token\", jsonData.token);\r",
+							"        \r",
+							"        // Log opcional para o console do Postman, confirmando que funcionou\r",
+							"        console.log(\"Token de autenticação salvo com sucesso na variável da collection.\");\r",
+							"    } else {\r",
+							"        console.log(\"A resposta não continha um token válido.\");\r",
+							"    }\r",
+							"} catch (e) {\r",
+							"    console.error(\"Erro ao processar a resposta da autenticação:\", e);\r",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"nome\": \"Roberto Luiz\", \"email\": \"robertoluiz@gmail.com\", \"senha\": \"123456\", \"frontendOrigin\": 0}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/auth/register",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "users register admin",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"try {\r",
+							"    var jsonData = pm.response.json();\r",
+							"\r",
+							"    // Verifica se a resposta JSON contém uma propriedade chamada \"token\"\r",
+							"    if (jsonData && jsonData.token) {\r",
+							"        // Se o token existir, salva seu valor na variável \"Token\" no nível da collection\r",
+							"        pm.collectionVariables.set(\"Token\", jsonData.token);\r",
+							"        \r",
+							"        // Log opcional para o console do Postman, confirmando que funcionou\r",
+							"        console.log(\"Token de autenticação salvo com sucesso na variável da collection.\");\r",
+							"    } else {\r",
+							"        console.log(\"A resposta não continha um token válido.\");\r",
+							"    }\r",
+							"} catch (e) {\r",
+							"    console.error(\"Erro ao processar a resposta da autenticação:\", e);\r",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"nome\": \"admin\", \"email\": \"admin@admin\", \"senha\": \"123456\",\"frontendOrigin\": 0}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/auth/register-admin",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"auth",
+						"register-admin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "users",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{Token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"nome\":\"Marcos Antonio\",\"role\":\"ROLE_USER\",\"frontendOrigin\": 0}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/users/4",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "users",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{Token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/users/6",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "users",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{Token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/users/34",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"34"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "users list",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{Token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/users?page=0&size=10",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"users"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "size",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "authenticate",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"try {\r",
+							"    var jsonData = pm.response.json();\r",
+							"\r",
+							"    // Verifica se a resposta JSON contém uma propriedade chamada \"token\"\r",
+							"    if (jsonData && jsonData.token) {\r",
+							"        // Se o token existir, salva seu valor na variável \"Token\" no nível da collection\r",
+							"        pm.collectionVariables.set(\"Token\", jsonData.token);\r",
+							"        \r",
+							"        // Log opcional para o console do Postman, confirmando que funcionou\r",
+							"        console.log(\"Token de autenticação salvo com sucesso na variável da collection.\");\r",
+							"    } else {\r",
+							"        console.log(\"A resposta não continha um token válido.\");\r",
+							"    }\r",
+							"} catch (e) {\r",
+							"    console.error(\"Erro ao processar a resposta da autenticação:\", e);\r",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"email\": \"admin@admin\", \"senha\": \"123456\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/auth/authenticate",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"auth",
+						"authenticate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addresses",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{Token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"cep\": \"03334010\",\r\n    \"numero\": \"123\",\r\n    \"complemento\": \"Apto 45\",\r\n    \"frontendOrigin\": 0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/users/3/addresses",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"3",
+						"addresses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addresses",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{Token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"cep\": \"03334030\",\r\n    \"numero\": \"123\",\r\n    \"complemento\": \"Apto 45\",\r\n    \"frontendOrigin\": 0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/users/3/addresses/6",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"3",
+						"addresses",
+						"6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addresses",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{Token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/users/10/addresses/19",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"10",
+						"addresses",
+						"19"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addresses list",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{Token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/users/10/addresses",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"10",
+						"addresses"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "Token",
+			"value": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjEwLCJhdXRob3JpdGllcyI6WyJST0xFX0FETUlOIl0sInN1YiI6Im1hdXJpY2lvLmFuZHJhZGU0NkBnbWFpbC5jb20iLCJpYXQiOjE3NTAwNzIyMDQsImV4cCI6MTc1MDE1ODYwNH0.mVtXcAB14PbWou_vSSvB3rLwrvOVrPDQdGHB6vmzNAw\n\n",
+			"type": "string"
+		},
+		{
+			"key": "baseUrl",
+			"value": "https://vpsw2882.publiccloud.com.br/fullstack",
+			"type": "string",
+			"disabled": true
+		},
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8080/fullstack",
+			"type": "string"
+		}
+	]
+}

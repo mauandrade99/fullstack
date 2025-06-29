@@ -1,0 +1,17 @@
+cd\javaprojects\fullstackapi
+git init
+git remote add origin https://github.com/mauandrade99/fullstack
+
+cd\javaprojects\fullstackapi
+git init
+git add .
+git commit -m "fullstackapi release 2.0 auditoria"
+git branch -M main
+git push -u origin main
+
+cd\javaprojects\fullstackapi
+mvn clean package -DskipTests
+
+
+
+
