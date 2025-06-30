@@ -5,7 +5,7 @@ git remote add origin https://github.com/mauandrade99/fullstack
 cd\javaprojects\fullstackapi
 git init
 git add .
-git commit -m "fullstackapi release 2.0 auditoria"
+git commit -m "fullstackapi release 2.0"
 git branch -M main
 git push -u origin main
 
