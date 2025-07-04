@@ -34,16 +34,23 @@ Este projeto é uma aplicação Fullstack completa desenvolvida em Java com Spri
 
 Uma versão de demonstração da aplicação está disponível online. Você pode acessá-la e testar as funcionalidades diretamente no navegador.
 
+https://drive.google.com/file/d/1RQsGoGagUz0L3Q2lXz7v6tXxtjAYbpNv/view?usp=sharing
+
 **Versão Angular**
 
 - **URL de Acesso:** **[https://vpsw2882.publiccloud.com.br/frontend-angular/auth/login](https://vpsw2882.publiccloud.com.br/frontend-angular/auth/login)**
 
-- **(este projeto esta em outro repositório: [https://github.com/mauandrade99/frontend_angular](https://github.com/mauandrade99/frontend_angular))**
+- **este projeto esta em outro repositório: [https://github.com/mauandrade99/frontend_angular](https://github.com/mauandrade99/frontend_angular)**
 
 **Versão React**
 
-- **(este projeto esta em outro repositório: [https://github.com/mauandrade99/frontendreact](https://github.com/mauandrade99/frontendreact))**
+- **este projeto esta em outro repositório: [https://github.com/mauandrade99/frontendreact](https://github.com/mauandrade99/frontendreact)**
 
+**Versão React APK**
+
+- **Apk Disponivel para Android: [https://drive.google.com](https://drive.google.com/file/d/1RQsGoGagUz0L3Q2lXz7v6tXxtjAYbpNv/view?usp=sharing)**
+
+- **este projeto esta em outro repositório: [https://github.com/mauandrade99/frontengerenciadormobile](https://github.com/mauandrade99/gerenciadormobile)**
 
 **Versão: JSP**
 

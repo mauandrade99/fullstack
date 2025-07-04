@@ -2,7 +2,9 @@ package br.com.teste.fullstackapi.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable; 
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -75,8 +77,8 @@ public class UserController {
 
     @GetMapping
     @PreAuthorize("hasRole('ADMIN')") // Listar todos os usuários é uma ação de Admin
-    public ResponseEntity<Page<UserResponseDTO>> getAllUsers(Pageable pageable) {
-        // Busca a página de entidades User
+    public ResponseEntity<Page<UserResponseDTO>> getAllUsers(@PageableDefault(sort = "nome", direction = Sort.Direction.ASC) Pageable pageable) {
+               
         Page<User> userPage = userService.findAllUsers(pageable);
         
         // Converte a página de User para uma página de UserResponseDTO
